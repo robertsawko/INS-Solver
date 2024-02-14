@@ -227,7 +227,7 @@ void KDTreeMPI::build_tree(const DG_FP *x, const DG_FP *y, const int num, op_dat
     empty = false;
 
     timer->startTimer("K-D Tree - Construct Tree");
-    construct_tree(points.begin(), points.end(), false, 0);
+    // construct_tree(points.begin(), points.end(), false, 0);
     timer->endTimer("K-D Tree - Construct Tree");
   }
 }

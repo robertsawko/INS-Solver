@@ -60,7 +60,7 @@ void KDTree::build_tree(const DG_FP *x, const DG_FP *y, const int num, op_dat s)
   empty = false;
 
   timer->startTimer("K-D Tree - Construct Tree");
-  construct_tree(points.begin(), points.end(), false, 0);
+  // construct_tree(points.begin(), points.end(), false, 0);
   timer->endTimer("K-D Tree - Construct Tree");
 }
 
@@ -69,7 +69,15 @@ KDCoord KDTree::closest_point(DG_FP x, DG_FP y) {
   vector<KDCoord>::iterator res = points.end();
   int current_ind = 0;
 
-  nearest_neighbour(x, y, current_ind, res, closest_distance);
+  for(auto it = points.begin(); it != points.end(); it++) {
+    DG_FP square_dist = (x - it->x) * (x - it->x) + (y - it->y) * (y - it->y);
+    if(square_dist < closest_distance) {
+      res = it;
+      closest_distance = square_dist;
+    }
+  }
+
+  // nearest_neighbour(x, y, current_ind, res, closest_distance);
 
   return *res;
 }
